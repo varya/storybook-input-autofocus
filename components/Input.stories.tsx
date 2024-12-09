@@ -47,4 +47,11 @@ export const Autofocus: Story = {
     placeholder: 'Autofocused input',
     autoFocus: true,
   },
+  decorators: [
+    (Story) => (
+      <details>
+        <Story />
+      </details>
+    ),
+  ],
 };
