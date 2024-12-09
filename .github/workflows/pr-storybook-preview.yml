@@ -35,3 +35,18 @@ jobs:
           publish_dir: ./storybook-static
           destination_dir: pr:${{ github.event.pull_request.number }}
           keep_files: true # Ensures other files/folders are preserved
+
+      # Post PR comment with preview link
+      - name: Post PR Comment
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const previewUrl = `https://varya.me/storybook-input-autofocus/pr:${prNumber}/`;
+            const body = `🚀 Your Storybook PR Preview is ready! [View it here](${previewUrl})`;
+            github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body,
+            });
