@@ -6,7 +6,7 @@ const DelayedVisibilityDecorator = (Story) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setVisible(true);
-    }, 1000);
+    }, 0);
     return () => clearTimeout(timer);
   }, []);
 
