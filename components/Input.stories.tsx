@@ -10,7 +10,17 @@ const meta: Meta<typeof Input> = {
       inlineStories: true, // Ensures stories appear inline in Docs
     },
   },
+  decorators: [
+    (Story, context) => {
+      const isDocs = context.viewMode === 'docs'
+
+      const storyArgs = { ...context.args, autoFocus: isDocs ? false : context.args.autoFocus }
+
+      return <Story args={storyArgs} />
+    },
+  ],
 };
+
 export default meta;
 
 type Story = StoryObj<typeof Input>;
